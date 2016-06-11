@@ -51,17 +51,17 @@ module Tests =
   [<Test>]                                                                                                                 
   let ``sprintModules <| toTree "/home/user/oh.fs" "module Oh\n[<Total(\"forall x y . x < y ==> i x + 2 <= i y\")>]\nlet f (x: int): int = if x > 1 then x * x * x else x - 2"`` () =
     let result = sprintModules <| toTree "/home/user/oh.fs" "module Oh\n[<Total(\"forall x y . x < y ==> i x + 2 <= i y\")>]\nlet f (x: int): int = if x > 1 then x * x * x else x - 2"
-    printfn "result = %s" result
+    printfn "result = %s" (string result)
 
   [<Test>]
   let ``sprintModules <| toTree "/home/user/oh.fs" "module Oh\n[<Total(\"forall x y . x < y ==> i x < i y\")>]\nlet g (x: int): int = x * x"`` () =
     let result = sprintModules <| toTree "/home/user/oh.fs" "module Oh\n[<Total(\"forall x y . x < y ==> i x < i y\")>]\nlet g (x: int): int = x * x"
-    printfn "result = %s" result
+    printfn "result = %s" (string result)
 
   [<Test>]
   let ``sprintModules <| toTree "/home/user/oh.fs" "module Oh\n[<Total \"forall x y . x > y <==> i x > i y\">] let f (x: int, y: int) (z: int): xx:int = x * x * x"`` () =
     let result = sprintModules <| toTree "/home/user/oh.fs" "module Oh\n[<Total \"forall x y . x > y <==> i x > i y\">] let f (x: int, y: int) (z: int): xx:int = x * x * x"
-    printfn "result = %s" result
+    printfn "result = %s" (string result)
 
   [<Test>]
   let ``createModule "Oh" ["haha", "forall x . x > 0 <==> i x > 0", <@@fun x -> x * x@@>] |> sprintModule |> printfn "result = %s"`` () = 
@@ -69,6 +69,7 @@ module Tests =
                        "forall x . x > 0 <==> i x > 0",
                        <@@fun x -> x * x@@>]
     |> sprintModule
+    |> string
     |> printfn "result = %s"           
 
   [<EntryPoint>]
